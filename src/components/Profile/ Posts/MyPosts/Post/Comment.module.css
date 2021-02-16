@@ -1,0 +1,8 @@
+.comment {}
+.comment img {
+    width: 60px;
+    border-radius: 50%;
+}
+.comment .text {
+    display: inline-block;
+}
