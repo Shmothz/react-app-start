@@ -7,18 +7,29 @@ import {NavLink} from 'react-router-dom';
 
 
 const Dialogs = (props) => {
+
+    let dialogs = [
+        {id:1,username:'Mikhail'},
+        {id:2,username:'Viktoria'},
+        {id:3,username:'Natasha'}
+        ]
+
+    let messages = [
+        {id:1,message:'Hello , how are you?'},
+        {id:2,message:'Im fine and you?'},
+        {id:3,message:'Me too'}
+    ]
+
+    let dialog = dialogs.map(d => <Item username={d.username} id={d.id} />)
+    let message = messages.map(m => <Message message={m.message} /> )
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <Item username='Михаил Петрович' id='1' />
-                <Item username='Юлия Наговицина' id='2' />
-                <Item username='Виктория Мудаш' id='3' />
+                {dialog}
             </div>
             <div className={s.messages}>
-                <Message />
-                <Message />
-                <Message />
-                <Message />
+                {message}
             </div>
         </div>
     )
