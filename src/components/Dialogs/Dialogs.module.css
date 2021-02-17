@@ -1,0 +1,11 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+.dialogsItems {
+    background-color: rgb(150,150,200);
+}
+
+.messages {
+    background-color: rgb(200,150,150);
+}
