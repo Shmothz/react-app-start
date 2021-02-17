@@ -1,0 +1,30 @@
+
+.wallpaperWrapper {
+    height: 250px;
+}
+
+.wallpaper {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+}
+.infoWrapper {
+    padding: 10px;
+    margin: 8px 60px 0;
+    background-color: rgb(150,150,200);
+    border-radius: 4px;
+    color: lightgoldenrodyellow;
+    display: grid;
+    grid-template-columns: 150px 320px;
+    grid-gap: 8px;
+}
+
+.avatar {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+}
+.aboutMe {
+    display: inline-block;
+}

@@ -1,8 +1,28 @@
-.comment {}
+.comment {
+    color: lightgoldenrodyellow;
+    background-color: rgba(200,200,250, 0.8);
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+.comment:last-child {
+    margin-bottom: 0;
+}
 .comment img {
     width: 60px;
+    margin: 0 16px 0 8px;
     border-radius: 50%;
 }
 .comment .text {
+    margin: 0 16px;
     display: inline-block;
+}
+.comment .like {
+    padding: 20px;
+    border-radius: 4px;
+    background-color: rgb(150,150,200);
+    margin: 0 8px 0 16px;
 }

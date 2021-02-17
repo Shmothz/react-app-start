@@ -1,12 +1,13 @@
 .nav {
     grid-area: n;
-    background-color: rgb(150,200,150);
+    background-color: rgb(200,200,250);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     padding-left: 20px;
     padding-top: 18px;
+    border-radius: 4px;
 }
 .item {
     margin-top: 4px;
@@ -16,7 +17,7 @@
 }
 
 a {
-    color: white;
+    color: lightgoldenrodyellow;
     font-size: 18px;
     text-decoration: none;
 }

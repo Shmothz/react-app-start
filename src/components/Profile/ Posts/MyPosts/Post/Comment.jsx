@@ -6,9 +6,7 @@ const Comment = (props) => {
         <div className={s.comment}>
             <img src='https://media.hearthpwn.com/avatars/304/471/636109493175114438.jpeg' alt='avatar'/>
             <p className={s.text}>{props.message}</p>
-            <div>
-                <span>Like</span>
-            </div>
+            <span className={s.like}>Like</span>
         </div>
     )
 }
