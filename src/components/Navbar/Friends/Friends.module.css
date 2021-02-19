@@ -1,0 +1,22 @@
+.wrapper {
+    background-color: rgba(200,200,250,0.8);
+    padding-top: 18px;
+    color: lightgoldenrodyellow;
+}
+
+.title {
+    margin: 0;
+    font-size: 18px;
+}
+
+.online {
+    opacity: 0.5;
+    font-size: 14px;
+}
+
+.friends {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
