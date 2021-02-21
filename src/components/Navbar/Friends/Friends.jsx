@@ -1,10 +1,11 @@
 import React from 'react';
 import s from './Friends.module.css';
 import Friend from './Friend/Friend';
+import Item from '../../Dialogs/Item/Item';
 
 const Friends = (props) => {
 
-    let friend = props.state.friends.map(f => <Friend avatar={f.avatar} name={f.name} />)
+    let friend = props.state.friends.map((f,idx) => <Friend key={idx} avatar={f.avatar} name={f.name} />)
 
     return (
         <div className={s.wrapper}>
