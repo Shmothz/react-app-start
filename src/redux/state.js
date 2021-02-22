@@ -19,7 +19,8 @@ let state = {
             {id:1,post:'Hello world!',likesCount:4},
             {id:2,post:'How are you?',likesCount:13},
             {id:3,post:'This is first comment!',likesCount:77}
-        ]
+        ],
+        newPostText : 'Serious'
     },
     navPage: {
         friends: [
@@ -31,13 +32,18 @@ let state = {
     }
 }
 
-export let addPost = (textPost) => {
+export let addPost = () => {
     let newPost = {
         id: state.profilePage.posts.length,
-        post: textPost,
+        post: state.profilePage.newPostText,
         likesCount: 0
-    }
+    };
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+    renderPage(state)
+}
+export let upgradePostText = (newText) => {
+    state.profilePage.newPostText = newText
     renderPage(state)
 }
 
