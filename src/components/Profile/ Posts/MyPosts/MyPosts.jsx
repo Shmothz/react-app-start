@@ -17,8 +17,6 @@ const MyPosts = (props) => {
         props.upgradePostText(text)
     }
 
-    console.log(props.newPostText)
-
     return (
         <div className={s.myPostsWrapper}>
             <h3 className={s.title}>My posts</h3>
