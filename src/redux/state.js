@@ -1,3 +1,5 @@
+const ADD_POST = 'ADD-POST'
+const UPGRADE_POST_TEXT = 'UPGRADE-POST-TEXT'
 
 let store = {
      _state: {
@@ -35,6 +37,9 @@ let store = {
          return this._state
     },
     renderPage ()  {},
+    subscribe  (observer)  {
+        this.renderPage = observer
+    },
     addPost  ()  {
         let newPost = {
             id: this._state.profilePage.posts.length,
@@ -49,9 +54,20 @@ let store = {
         this._state.profilePage.newPostText = newText
         this.renderPage(this._state)
     },
-    subscribe  (observer)  {
-        this.renderPage = observer
+    dispatch (action) {
+         if (action.type === ADD_POST) {
+             this.addPost()
+         } else if (action.type === UPGRADE_POST_TEXT) {
+             this.upgradePostText(action.newText)
+         }
     }
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const upgradePostTextActionCreator = (text) => ({
+    type: UPGRADE_POST_TEXT,
+    newText: text
+})
+
 
 export default store

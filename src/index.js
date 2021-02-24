@@ -10,8 +10,7 @@ export let renderPage = (state) => {
         <React.StrictMode>
             <BrowserRouter>
                 <App state={state}
-                     addPost={store.addPost.bind(store)}
-                     upgradePostText={store.upgradePostText.bind(store)} />
+                     dispatch={store.dispatch.bind(store)}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
