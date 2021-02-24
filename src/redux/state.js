@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const UPGRADE_POST_TEXT = 'UPGRADE-POST-TEXT'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+const UPGRADE_MESSAGE_TEXT = 'UPGRADE-MESSAGE-TEXT'
 
 let store = {
      _state: {
@@ -10,11 +12,12 @@ let store = {
                 {id:3,username:'Natasha'}
             ],
             messages : [
-                {id:0,message:['Hello','Bye','How are you?']},
-                {id:1,message:['Im fine and you?', 'Meow']},
-                {id:2,message:['We will rock you', 'Gav']},
-                {id:3,message:['Enter sandman', 'Just do it']},
-            ]
+                {id:0,message:'Hello'},
+                {id:1,message:'Im fine and you?'},
+                {id:2,message:'We will rock you'},
+                {id:3,message:'Enter sandman'},
+            ],
+            newMessageText: ''
         },
         profilePage: {
             posts : [
@@ -54,11 +57,28 @@ let store = {
         this._state.profilePage.newPostText = newText
         this.renderPage(this._state)
     },
+    sendMessage () {
+         let newMessage = {
+             id: this._state.dialogsPage.messages.length,
+             message: this._state.dialogsPage.newMessageText
+         }
+         this._state.dialogsPage.messages.push(newMessage)
+        this._state.dialogsPage.newMessageText = ''
+        this.renderPage(this._state)
+    },
+    upgradeMessageText (newText) {
+         this._state.dialogsPage.newMessageText = newText
+        this.renderPage(this._state)
+    },
     dispatch (action) {
          if (action.type === ADD_POST) {
              this.addPost()
          } else if (action.type === UPGRADE_POST_TEXT) {
              this.upgradePostText(action.newText)
+         } else if (action.type === SEND_MESSAGE) {
+             this.sendMessage()
+         } else if (action.type === UPGRADE_MESSAGE_TEXT) {
+             this.upgradeMessageText(action.newText)
          }
     }
 }
@@ -66,6 +86,11 @@ let store = {
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const upgradePostTextActionCreator = (text) => ({
     type: UPGRADE_POST_TEXT,
+    newText: text
+})
+export const sendMessageActionCreator = () => ({type: SEND_MESSAGE})
+export const upgradeMessageTextActionCreator = (text) => ({
+    type: UPGRADE_MESSAGE_TEXT,
     newText: text
 })
 
