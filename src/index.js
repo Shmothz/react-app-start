@@ -1,4 +1,4 @@
-import store from './redux/store';
+import store from './redux/redux-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -17,6 +17,10 @@ export let renderPage = (state) => {
     );
 }
 
-store.subscribe(renderPage)
+renderPage(store.getState())
 
-renderPage(store.getStore())
+store.subscribe(() => {
+    let state = store.getState()
+    renderPage(state)
+})
+
