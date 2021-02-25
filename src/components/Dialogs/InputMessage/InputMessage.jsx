@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './InputMessage.module.css';
-import {sendMessageActionCreator, upgradeMessageTextActionCreator} from '../../../redux/state'
+import {sendMessageActionCreator, upgradeMessageTextActionCreator} from '../../../redux/dialogsReducer'
 
 const InputMessage = (props) => {
 
