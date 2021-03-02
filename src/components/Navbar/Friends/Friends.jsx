@@ -1,11 +1,10 @@
 import React from 'react';
 import s from './Friends.module.css';
 import Friend from './Friend/Friend';
-import Item from '../../Dialogs/Item/Item';
 
 const Friends = (props) => {
 
-    let friend = props.state.friends.map((f,idx) => <Friend key={idx} avatar={f.avatar} name={f.name} />)
+    let friend = props.store.navPage.friends.map((f,idx) => <Friend key={idx} avatar={f.avatar} name={f.name} />)
 
     return (
         <div className={s.wrapper}>
@@ -17,4 +16,4 @@ const Friends = (props) => {
     )
 }
 
-export default Friends;
+export default Friends
