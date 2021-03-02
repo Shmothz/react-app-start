@@ -1,17 +1,16 @@
-import React from 'react';
-import s from './InputMessage.module.css';
-import {sendMessageActionCreator, upgradeMessageTextActionCreator} from '../../../redux/dialogsReducer'
+import React from 'react'
+import s from './InputMessage.module.css'
 
 const InputMessage = (props) => {
 
     let inputTextMessage = React.createRef()
 
     let sendMessage = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
     let onMessageChange = () => {
         let text = inputTextMessage.current.value
-        props.dispatch(upgradeMessageTextActionCreator(text))
+        props.onMessageChange(text)
     }
 
     return (
