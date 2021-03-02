@@ -3,13 +3,14 @@ import s from './InputMessage.module.css'
 
 const InputMessage = (props) => {
 
-    let inputTextMessage = React.createRef()
+    // let inputTextMessage = React.createRef()
 
     let sendMessage = () => {
         props.sendMessage()
     }
-    let onMessageChange = () => {
-        let text = inputTextMessage.current.value
+    let onMessageChange = (e) => {
+        let text = e.target.value
+        // let text = inputTextMessage.current.value
         props.onMessageChange(text)
     }
 
@@ -21,7 +22,7 @@ const InputMessage = (props) => {
             <textarea onChange={onMessageChange}
                       value={props.newMessageText}
                       className={s.inputText}
-                      ref={inputTextMessage}
+                      // ref={inputTextMessage}
                       rows='2' />
             <img onClick={sendMessage}
                  className={s.sendMessageIcon}
