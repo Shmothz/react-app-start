@@ -4,24 +4,16 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import {BrowserRouter} from 'react-router-dom'
+import {Provider} from 'react-redux';
 
-export let renderPage = (state) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state}
-                     store={store}
-                     dispatch={store.dispatch.bind(store)}/>
+                <Provider store={store}>
+                    <App />
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     )
-}
-
-renderPage(store.getState())
-
-store.subscribe(() => {
-    let state = store.getState()
-    renderPage(state)
-})
 

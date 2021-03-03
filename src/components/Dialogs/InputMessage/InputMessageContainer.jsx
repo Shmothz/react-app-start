@@ -3,28 +3,11 @@ import InputMessage from './InputMessage'
 import {sendMessageActionCreator, upgradeMessageTextActionCreator} from '../../../redux/dialogsReducer'
 import {connect} from 'react-redux';
 
-// const InputMessageContainer = (props) => {
-//
-//     let state = props.store.getState().dialogsPage
-//
-//     let sendMessage = () => {
-//         props.store.dispatch(sendMessageActionCreator())
-//     }
-//     let onMessageChange = (text) => {
-//         props.store.dispatch(upgradeMessageTextActionCreator(text))
-//     }
-//
-//     return (
-//         <InputMessage
-//             sendMessage={sendMessage}
-//             onMessageChange={onMessageChange}
-//             newMessageText={state.newMessageText}/>
-//     )
-// }
-
 let mapStateToProps = (state) => {
     return {
-        newMessageText: state.newMessageText
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages,
+        newMessageText: state.dialogsPage.newMessageText
     }
 }
 let mapDispatchToProps = (dispatch) => {

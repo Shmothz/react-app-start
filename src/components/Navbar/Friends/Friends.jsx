@@ -4,9 +4,7 @@ import Friend from './Friend/Friend';
 
 const Friends = (props) => {
 
-    let state = props.store.getState().navPage
-
-    let friend = state.friends.map((f,idx) => <Friend key={idx} avatar={f.avatar} name={f.name} />)
+    let friend = props.navPage.friends.map((f,idx) => <Friend key={idx} avatar={f.avatar} name={f.name} />)
 
     return (
         <div className={s.wrapper}>

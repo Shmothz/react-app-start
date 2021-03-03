@@ -4,6 +4,7 @@ import Comment from './Post/Comment'
 
 const MyPosts = (props) => {
 
+
     let post = props.posts.map((p,idx) => <Comment key={idx}
                                                    message={p.post}
                                                    likes={p.likesCount}/>)

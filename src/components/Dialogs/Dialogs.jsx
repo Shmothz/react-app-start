@@ -6,10 +6,8 @@ import InputMessageContainer from './InputMessage/InputMessageContainer';
 
 const Dialogs = (props) => {
 
-    let state = props.store.getState().dialogsPage
-
-    let dialog = state.dialogs.map((d,idx) => <Item key={idx} username={d.username} id={d.id} />)
-    let message = state.messages.map((m,idx) => <Message key={idx} message={m.message} id={m.id} /> )
+    let dialog = props.dialogs.map((d) => <Item key={d.id} username={d.username} id={d.id} />)
+    let message = props.messages.map((m) => <Message key={m.id} message={m.message} id={m.id} /> )
 
     return (
         <div className={s.dialogs}>
@@ -18,9 +16,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {message}
-                <InputMessageContainer
-                store={props.store}
-                />
+                <InputMessageContainer />
             </div>
         </div>
     )
