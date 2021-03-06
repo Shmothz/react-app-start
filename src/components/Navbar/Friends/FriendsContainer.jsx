@@ -8,11 +8,7 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
+    return {}
 }
 
-const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends)
-
-export default FriendsContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Friends)

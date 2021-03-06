@@ -1,3 +1,23 @@
 .userAvatar {
-    width: 50px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.follow,
+.unfollow {
+    padding: 6px 8px;
+}
+
+.follow,
+.unfollow,
+.follow:active,
+.unfollow:active {
+    border: none;
+    outline: none;
+}
+.unfollow {
+    background-color: indianred;
+}
+.follow {
+    background-color: darkseagreen;
 }
