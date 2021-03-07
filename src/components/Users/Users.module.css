@@ -1,3 +1,7 @@
+.pagesNumbersWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
 .userAvatar {
     width: 45px;
     height: 45px;
@@ -20,4 +24,11 @@
 }
 .follow {
     background-color: darkseagreen;
+}
+.pageNumber {
+    cursor: pointer;
+}
+.selectedPage {
+    cursor: pointer;
+    font-size: 24px;
 }
