@@ -27,18 +27,21 @@ class UsersAPI extends React.Component {
       })
   }
   render = () => {
-    return(
+    return (
       <>
-        {this.props.isFetching === true ? <Preloader /> : null}
-        <Users
-        totalCount={this.props.totalCount}
-        usersOnPage={this.props.usersOnPage}
-        activePage={this.props.activePage}
-        unfollow={this.props.unfollow}
-        follow={this.props.follow}
-        users={this.props.users}
-        isFetching={this.props.isFetching}
-        setActivePage={this.setActivePage}/>
+        {this.props.isFetching === true
+          ? <Preloader/>
+          : <Users
+            totalCount={this.props.totalCount}
+            usersOnPage={this.props.usersOnPage}
+            activePage={this.props.activePage}
+            unfollow={this.props.unfollow}
+            follow={this.props.follow}
+            users={this.props.users}
+            isFetching={this.props.isFetching}
+            setActivePage={this.setActivePage}
+          />
+        }
       </>
     )
   }
