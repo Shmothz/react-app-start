@@ -4,13 +4,15 @@ const GET_USERS = 'GET_USERS'
 const COUNT_PAGES = 'COUNT_PAGES'
 const SET_PAGE = 'SET_PAGE'
 const IS_FETCHING = 'IS_FETCHING'
+const IS_TOGGLE_FOLLOW = 'IS_TOGGLE_FOLLOW'
 
 let initialState = {
   users: [],
   usersOnPage: 5,
   activePage: 1,
   totalCount: 0,
-  isFetching: false
+  isFetching: false,
+  isToggleFollow: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -56,6 +58,13 @@ const usersReducer = (state = initialState, action) => {
       return {
       ...state, isFetching: action.isFetching
       }
+    case IS_TOGGLE_FOLLOW:
+      return {
+        ...state,
+        isToggleFollow: action.isToggle
+          ? [...state.isToggleFollow, action.userId]
+          : state.isToggleFollow.filter(id => id != action.id)
+      }
     default:
       return state
   }
@@ -67,6 +76,7 @@ export const setUsers = (users) => ({type: GET_USERS, users})
 export const setPage = (page) => ({type: SET_PAGE, page})
 export const totalUsersCount = (totalCount) => ({type: COUNT_PAGES, count: totalCount})
 export const toggleIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
+export const isToggleFollowing = (isToggle, userId) => ({type: IS_TOGGLE_FOLLOW, isToggle, userId})
 
 
 

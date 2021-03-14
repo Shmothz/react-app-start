@@ -1,29 +1,35 @@
 import React from 'react'
 import Users from './Users'
 import {connect} from 'react-redux';
-import {totalUsersCount, follow, setUsers, setPage, unfollow, toggleIsFetching} from '../../redux/usersReducer';
-import * as axios from 'axios';
+import {
+  totalUsersCount,
+  follow,
+  setUsers,
+  setPage,
+  unfollow,
+  toggleIsFetching,
+  isToggleFollowing
+} from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
+import {usersAPI} from '../../api/Users';
 
 class UsersAPI extends React.Component {
   componentDidMount = () => {
     this.props.toggleIsFetching(true)
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.usersOnPage}`)
+    usersAPI.getUsers(this.props.activePage, this.props.usersOnPage)
       .then(response => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
-        this.props.totalUsersCount(response.data.totalCount)
+        this.props.setUsers(response.items)
+        this.props.totalUsersCount(response.totalCount)
       })
   }
   setActivePage = (p) => {
     this.props.toggleIsFetching(true)
     this.props.setPage(p)
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.usersOnPage}`)
+    usersAPI.getPage(p, this.props.usersOnPage)
       .then(response => {
         this.props.toggleIsFetching(false)
-        this.props.setUsers(response.data.items)
+        this.props.setUsers(response.items)
       })
   }
   render = () => {
@@ -39,6 +45,7 @@ class UsersAPI extends React.Component {
             follow={this.props.follow}
             users={this.props.users}
             isFetching={this.props.isFetching}
+            isToggleFollow={this.props.isToggleFollow}
             setActivePage={this.setActivePage}
           />
         }
@@ -54,9 +61,10 @@ const mapStateToProps = (state) => {
     totalCount: state.usersPage.totalCount,
     usersOnPage: state.usersPage.usersOnPage,
     activePage: state.usersPage.activePage,
-    isFetching: state.usersPage.isFetching
+    isFetching: state.usersPage.isFetching,
+    isToggleFollow: state.usersPage.isToggleFollow
   }
 }
 
 export default connect(mapStateToProps,
-  {follow, unfollow, setUsers, setPage, totalUsersCount, toggleIsFetching})(UsersAPI)
+  {follow, unfollow, setUsers, setPage, totalUsersCount, toggleIsFetching, isToggleFollowing})(UsersAPI)

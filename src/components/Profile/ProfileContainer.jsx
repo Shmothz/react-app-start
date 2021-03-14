@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from './Profile';
 import axios from 'axios';
-import {setProfile, toggleIsFetching} from '../../redux/profileReducer';
+import {setProfile, toggleIsFetching} from '../../redux/profile-reducer';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
