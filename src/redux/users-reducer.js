@@ -98,5 +98,21 @@ export const setActivePageTC = (pageNumber, usersOnPage) => (dispatch) => {
       dispatch(setUsers(response.items))
     })
 }
+export const followTC = (userId) => (dispatch) => {
+  dispatch(isFetchingFollowing(true, userId))
+  usersAPI.setFollow(userId).then(res => {
+      if (res.data.resultCode === 0) dispatch(unfollowAC(userId))
+    dispatch(isFetchingFollowing(false, userId))
+    }
+  )
+}
+export const unfollowTC = (userId) => (dispatch) => {
+  dispatch(isFetchingFollowing(true, userId))
+  usersAPI.setUnfollow(userId).then(res => {
+      if (res.data.resultCode === 0) dispatch(followAC(userId))
+    dispatch(isFetchingFollowing(false, userId))
+    }
+  )
+}
 
 export default usersReducer

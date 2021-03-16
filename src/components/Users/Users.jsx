@@ -2,7 +2,6 @@ import React from 'react'
 import userAvatar from '../../assets/images/user.jpg'
 import s from './Users.module.css'
 import {NavLink} from 'react-router-dom';
-import {usersAPI} from '../../api/api';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalCount / props.usersOnPage)
@@ -25,24 +24,9 @@ const Users = (props) => {
           </NavLink>
           {i.followed
             ? <button disabled={props.isToggleFollow.some(id => id === i.id)}
-                      className={s.unfollow} onClick={() => {
-              props.isFetchingFollowing(true, i.id)
-              usersAPI.setFollow(i.id).then(res => {
-                  if (res.data.resultCode === 0) props.unfollowAC(i.id)
-                  props.isFetchingFollowing(false, i.id)
-                }
-              )
-
-            }}>unfollow</button>
+                      className={s.unfollow} onClick={() => {props.followTC(i.id)}}>unfollow</button>
             : <button disabled={props.isToggleFollow.some(id => id === i.id)}
-                      className={s.follow} onClick={() => {
-              props.isFetchingFollowing(true, i.id)
-              usersAPI.setUnfollow(i.id).then(res => {
-                  if (res.data.resultCode === 0) props.followAC(i.id)
-                  props.isFetchingFollowing(false, i.id)
-                }
-              )
-            }}>follow</button>}
+                      className={s.follow} onClick={() => {props.unfollowTC(i.id)}}>follow</button>}
         </div>
         <div>
           <span>{i.name}</span>

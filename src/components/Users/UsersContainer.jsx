@@ -1,17 +1,11 @@
 import React from 'react'
 import Users from './Users'
-import {connect} from 'react-redux';
+import {connect} from 'react-redux'
 import {
   totalUsersCount,
-  followAC,
-  setUsers,
-  setPage,
-  unfollowAC,
-  toggleIsFetching,
-  isFetchingFollowing, setUsersTC, setActivePageTC
-} from '../../redux/users-reducer';
-import Preloader from '../common/Preloader/Preloader';
-import {usersAPI} from '../../api/api';
+  toggleIsFetching, setUsersTC, setActivePageTC, followTC, unfollowTC
+} from '../../redux/users-reducer'
+import Preloader from '../common/Preloader/Preloader'
 
 class UsersAPI extends React.Component {
   componentDidMount = () => {
@@ -29,12 +23,11 @@ class UsersAPI extends React.Component {
             totalCount={this.props.totalCount}
             usersOnPage={this.props.usersOnPage}
             activePage={this.props.activePage}
-            unfollowAC={this.props.unfollowAC}
-            followAC={this.props.followAC}
+            unfollowTC={this.props.unfollowTC}
+            followTC={this.props.followTC}
             users={this.props.users}
             isFetching={this.props.isFetching}
             isToggleFollow={this.props.isToggleFollow}
-            isFetchingFollowing={this.props.isFetchingFollowing}
             setActivePage={this.setActivePage}
           />
         }
@@ -57,13 +50,10 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps,
   {
-    followAC,
-    unfollowAC,
-    setUsers,
-    setPage,
     totalUsersCount,
     toggleIsFetching,
-    isFetchingFollowing,
     setUsersTC,
-    setActivePageTC
+    setActivePageTC,
+    followTC,
+    unfollowTC
   })(UsersAPI)
