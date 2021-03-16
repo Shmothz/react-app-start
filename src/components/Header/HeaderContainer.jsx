@@ -6,11 +6,10 @@ import {loginAPI} from '../../api/api';
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-    console.log(this.props.data)
     loginAPI.login()
       .then(data => {
         if (data.resultCode === 0) {
-          this.props.auth(data.id, data.login, data.email)
+          this.props.auth(data.data.id, data.data.login, data.data.email)
         }
       })
   }
