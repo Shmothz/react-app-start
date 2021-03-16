@@ -11,7 +11,7 @@ import {
   isToggleFollowing
 } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
-import {usersAPI} from '../../api/Users';
+import {usersAPI} from '../../api/api';
 
 class UsersAPI extends React.Component {
   componentDidMount = () => {

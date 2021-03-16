@@ -16,9 +16,7 @@ export const usersAPI = {
   getPage (page = 1 , usersOnPage = 5) {
     return instance.get(`users?page=${page}&count=${usersOnPage}`)
       .then(response => response.data)
-  }
-}
-export const followAPI = {
+  },
   follow (id) {
     return instance.delete(`follow/${id}`)
   },

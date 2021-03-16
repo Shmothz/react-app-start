@@ -2,7 +2,7 @@ import React from 'react'
 import userAvatar from '../../assets/images/user.jpg'
 import s from './Users.module.css'
 import {NavLink} from 'react-router-dom';
-import {followAPI} from '../../api/Users';
+import {usersAPI} from '../../api/api';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalCount / props.usersOnPage)
@@ -24,20 +24,20 @@ const Users = (props) => {
             <img className={s.userAvatar} src={i.photos.small ? i.photos.small : userAvatar}/>
           </NavLink>
           {i.followed
-            ? <button disabled={props.isToggleFollowing.some(id => id === i.id)}
+            ? <button disabled={props.isToggleFollow.some(id => id === i.id)}
                       className={s.unfollow} onClick={() => {
               props.isToggleFollowing(true, i.id)
-              followAPI.follow(i.id).then(response => {
+              usersAPI.follow(i.id).then(response => {
                   if (response.data.resultCode === 0) props.unfollow(i.id)
                   props.isToggleFollowing(false, i.id)
                 }
               )
 
             }}>unfollow</button>
-            : <button disabled={props.isToggleFollowing.some(id => id === i.id)}
+            : <button disabled={props.isToggleFollow.some(id => id === i.id)}
                       className={s.follow} onClick={() => {
               props.isToggleFollowing(true, i.id)
-              followAPI.unfollow(i.id).then(response => {
+              usersAPI.unfollow(i.id).then(response => {
                   if (response.data.resultCode === 0) props.follow(i.id)
                   props.isToggleFollowing(false, i.id)
                 }
