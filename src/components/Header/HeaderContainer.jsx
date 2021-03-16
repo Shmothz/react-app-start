@@ -6,6 +6,7 @@ import {loginAPI} from '../../api/api';
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
+    console.log(this.props.data)
     loginAPI.login()
       .then(data => {
         if (data.resultCode === 0) {
@@ -16,11 +17,15 @@ class HeaderContainer extends React.Component {
 
   render () {
     return (
-      <Header {...this.props} />
+      <Header {...this.props} data={this.props.data} />
     )
   }
 }
 
-const mapStateToProps = (state) => {}
+const mapStateToProps = (state) => {
+  return {
+    data: state.auth.data
+  }
+}
 
 export default connect(mapStateToProps,{auth})(HeaderContainer)

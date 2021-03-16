@@ -14,8 +14,11 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.infoWrapper}>
                 <img className={s.avatar} src={props.profile.photos.large} alt='avatar'/>
+                <div className={s.fullName}>
+                  <span>My name is {props.profile.fullName}</span>
+                </div>
                 <div className={s.aboutMe}>
-                    <span>About me</span>
+                    <span>About me : {props.profile.aboutMe}</span>
                 </div>
             </div>
         </div>
