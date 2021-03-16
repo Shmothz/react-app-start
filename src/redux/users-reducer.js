@@ -63,7 +63,7 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isToggleFollow: action.isToggle
           ? [...state.isToggleFollow, action.userId]
-          : state.isToggleFollow.filter(id => id != action.id)
+          : state.isToggleFollow.filter(id => id !== action.userId)
       }
     default:
       return state
@@ -77,7 +77,5 @@ export const setPage = (page) => ({type: SET_PAGE, page})
 export const totalUsersCount = (totalCount) => ({type: COUNT_PAGES, count: totalCount})
 export const toggleIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
 export const isToggleFollowing = (isToggle, userId) => ({type: IS_TOGGLE_FOLLOW, isToggle, userId})
-
-
 
 export default usersReducer

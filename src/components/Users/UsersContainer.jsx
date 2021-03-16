@@ -46,6 +46,7 @@ class UsersAPI extends React.Component {
             users={this.props.users}
             isFetching={this.props.isFetching}
             isToggleFollow={this.props.isToggleFollow}
+            isToggleFollowing={this.props.isToggleFollowing}
             setActivePage={this.setActivePage}
           />
         }
