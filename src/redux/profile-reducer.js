@@ -1,3 +1,5 @@
+import {profileAPI} from '../api/api';
+
 const ADD_POST = 'ADD-POST'
 const UPGRADE_POST_TEXT = 'UPGRADE-POST-TEXT'
 const GET_PROFILE = 'GET_PROFILE'
@@ -49,5 +51,12 @@ export const addPostActionCreator = () => ({type: ADD_POST})
 export const upgradePostTextActionCreator = (text) => ({type: UPGRADE_POST_TEXT,newText: text})
 export const setProfile = (profileData) => ({type: GET_PROFILE, profile: profileData})
 export const toggleIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
+
+export const getUserDataTC = (userId) => (dispatch) => {
+    profileAPI.getUserData(userId)
+      .then(res => {
+          dispatch(setProfile(res.data))
+      })
+}
 
 export default profileReducer

@@ -24,9 +24,13 @@ const Users = (props) => {
           </NavLink>
           {i.followed
             ? <button disabled={props.isToggleFollow.some(id => id === i.id)}
-                      className={s.unfollow} onClick={() => {props.followTC(i.id)}}>unfollow</button>
+                      className={s.unfollow} onClick={() => {
+              props.followTC(i.id)
+            }}>unfollow</button>
             : <button disabled={props.isToggleFollow.some(id => id === i.id)}
-                      className={s.follow} onClick={() => {props.unfollowTC(i.id)}}>follow</button>}
+                      className={s.follow} onClick={() => {
+              props.unfollowTC(i.id)
+            }}>follow</button>}
         </div>
         <div>
           <span>{i.name}</span>
