@@ -3,34 +3,22 @@ import Users from './Users'
 import {connect} from 'react-redux';
 import {
   totalUsersCount,
-  follow,
+  followAC,
   setUsers,
   setPage,
-  unfollow,
+  unfollowAC,
   toggleIsFetching,
-  isToggleFollowing
+  isFetchingFollowing, setUsersTC, setActivePageTC
 } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import {usersAPI} from '../../api/api';
 
 class UsersAPI extends React.Component {
   componentDidMount = () => {
-    this.props.toggleIsFetching(true)
-    usersAPI.getUsers(this.props.activePage, this.props.usersOnPage)
-      .then(response => {
-        this.props.toggleIsFetching(false)
-        this.props.setUsers(response.items)
-        this.props.totalUsersCount(response.totalCount)
-      })
+    this.props.setUsersTC(this.props.activePage, this.props.usersOnPage)
   }
   setActivePage = (p) => {
-    this.props.toggleIsFetching(true)
-    this.props.setPage(p)
-    usersAPI.getPage(p, this.props.usersOnPage)
-      .then(response => {
-        this.props.toggleIsFetching(false)
-        this.props.setUsers(response.items)
-      })
+    this.props.setActivePageTC(p, this.props.usersOnPage)
   }
   render = () => {
     return (
@@ -41,12 +29,12 @@ class UsersAPI extends React.Component {
             totalCount={this.props.totalCount}
             usersOnPage={this.props.usersOnPage}
             activePage={this.props.activePage}
-            unfollow={this.props.unfollow}
-            follow={this.props.follow}
+            unfollowAC={this.props.unfollowAC}
+            followAC={this.props.followAC}
             users={this.props.users}
             isFetching={this.props.isFetching}
             isToggleFollow={this.props.isToggleFollow}
-            isToggleFollowing={this.props.isToggleFollowing}
+            isFetchingFollowing={this.props.isFetchingFollowing}
             setActivePage={this.setActivePage}
           />
         }
@@ -68,4 +56,14 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,
-  {follow, unfollow, setUsers, setPage, totalUsersCount, toggleIsFetching, isToggleFollowing})(UsersAPI)
+  {
+    followAC,
+    unfollowAC,
+    setUsers,
+    setPage,
+    totalUsersCount,
+    toggleIsFetching,
+    isFetchingFollowing,
+    setUsersTC,
+    setActivePageTC
+  })(UsersAPI)

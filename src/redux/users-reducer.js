@@ -1,3 +1,5 @@
+import {usersAPI} from '../api/api';
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const GET_USERS = 'GET_USERS'
@@ -56,12 +58,12 @@ const usersReducer = (state = initialState, action) => {
       }
     case IS_FETCHING:
       return {
-      ...state, isFetching: action.isFetching
+        ...state, isFetching: action.isFetching
       }
     case IS_TOGGLE_FOLLOW:
       return {
         ...state,
-        isToggleFollow: action.isToggle
+        isToggleFollow: action.isFetching
           ? [...state.isToggleFollow, action.userId]
           : state.isToggleFollow.filter(id => id !== action.userId)
       }
@@ -70,12 +72,31 @@ const usersReducer = (state = initialState, action) => {
   }
 }
 
-export const follow = (userId) => ({type: FOLLOW, userId})
-export const unfollow = (userId) => ({type: UNFOLLOW, userId})
+export const followAC = (userId) => ({type: FOLLOW, userId})
+export const unfollowAC = (userId) => ({type: UNFOLLOW, userId})
 export const setUsers = (users) => ({type: GET_USERS, users})
 export const setPage = (page) => ({type: SET_PAGE, page})
 export const totalUsersCount = (totalCount) => ({type: COUNT_PAGES, count: totalCount})
 export const toggleIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
-export const isToggleFollowing = (isToggle, userId) => ({type: IS_TOGGLE_FOLLOW, isToggle, userId})
+export const isFetchingFollowing = (isFetching, userId) => ({type: IS_TOGGLE_FOLLOW, isFetching, userId})
+
+export const setUsersTC = (activePage, usersOnPage) => (dispatch) => {
+  dispatch(toggleIsFetching(true))
+  usersAPI.getUsers(activePage, usersOnPage)
+    .then(response => {
+      dispatch(toggleIsFetching(false))
+      dispatch(setUsers(response.items))
+      dispatch(totalUsersCount(response.totalCount))
+    })
+}
+export const setActivePageTC = (pageNumber, usersOnPage) => (dispatch) => {
+  dispatch(toggleIsFetching(true))
+  dispatch(setPage(pageNumber))
+  usersAPI.getPage(pageNumber, usersOnPage)
+    .then(response => {
+      dispatch(toggleIsFetching(false))
+      dispatch(setUsers(response.items))
+    })
+}
 
 export default usersReducer

@@ -26,20 +26,20 @@ const Users = (props) => {
           {i.followed
             ? <button disabled={props.isToggleFollow.some(id => id === i.id)}
                       className={s.unfollow} onClick={() => {
-              props.isToggleFollowing(true, i.id)
+              props.isFetchingFollowing(true, i.id)
               usersAPI.setFollow(i.id).then(res => {
-                  if (res.data.resultCode === 0) props.unfollow(i.id)
-                  props.isToggleFollowing(false, i.id)
+                  if (res.data.resultCode === 0) props.unfollowAC(i.id)
+                  props.isFetchingFollowing(false, i.id)
                 }
               )
 
             }}>unfollow</button>
             : <button disabled={props.isToggleFollow.some(id => id === i.id)}
                       className={s.follow} onClick={() => {
-              props.isToggleFollowing(true, i.id)
+              props.isFetchingFollowing(true, i.id)
               usersAPI.setUnfollow(i.id).then(res => {
-                  if (res.data.resultCode === 0) props.follow(i.id)
-                  props.isToggleFollowing(false, i.id)
+                  if (res.data.resultCode === 0) props.followAC(i.id)
+                  props.isFetchingFollowing(false, i.id)
                 }
               )
             }}>follow</button>}
