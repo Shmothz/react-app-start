@@ -6,6 +6,8 @@ import {
   toggleIsFetching, setUsersTC, setActivePageTC, followTC, unfollowTC
 } from '../../redux/users-reducer'
 import Preloader from '../common/Preloader/Preloader'
+import RedirectComponent from '../../hoc/withAuth';
+import {compose} from 'redux';
 
 class UsersAPI extends React.Component {
   componentDidMount = () => {
@@ -44,16 +46,13 @@ const mapStateToProps = (state) => {
     usersOnPage: state.usersPage.usersOnPage,
     activePage: state.usersPage.activePage,
     isFetching: state.usersPage.isFetching,
-    isToggleFollow: state.usersPage.isToggleFollow
+    isToggleFollow: state.usersPage.isToggleFollow,
+    isAuth: state.auth.isAuth
   }
 }
 
-export default connect(mapStateToProps,
-  {
-    totalUsersCount,
-    toggleIsFetching,
-    setUsersTC,
-    setActivePageTC,
-    followTC,
-    unfollowTC
-  })(UsersAPI)
+export default compose(
+  connect(mapStateToProps, {totalUsersCount, toggleIsFetching, setUsersTC,
+    setActivePageTC, followTC, unfollowTC}),
+  RedirectComponent
+)(UsersAPI)
