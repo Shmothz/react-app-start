@@ -1,7 +1,6 @@
 import {profileAPI} from '../api/api';
 
 const ADD_POST = 'ADD-POST'
-const UPGRADE_POST_TEXT = 'UPGRADE-POST-TEXT'
 const GET_PROFILE = 'GET_PROFILE'
 const IS_FETCHING = 'IS_FETCHING'
 
@@ -11,7 +10,7 @@ let initialState = {
         {id:2,post:'How are you?',likesCount:13},
         {id:3,post:'This is first comment!',likesCount:77}
     ],
-        newPostText : '',
+    newPostText : '',
     profile: null,
     isFetching: false
 }
@@ -21,18 +20,12 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: state.posts.length,
-                post: state.newPostText,
+                post: action.newPostText,
                 likesCount: 0
             }
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
-            }
-        case UPGRADE_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case GET_PROFILE:
             return {
@@ -47,10 +40,9 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const upgradePostTextActionCreator = (text) => ({type: UPGRADE_POST_TEXT,newText: text})
 export const setProfile = (profileData) => ({type: GET_PROFILE, profile: profileData})
 export const toggleIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
+export const addNewPost = (newPostText) => ({type: ADD_POST, newPostText})
 
 export const getUserDataTC = (userId) => (dispatch) => {
     profileAPI.getUserData(userId)

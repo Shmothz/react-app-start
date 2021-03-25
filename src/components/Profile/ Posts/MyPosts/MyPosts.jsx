@@ -1,45 +1,40 @@
 import React from "react"
 import s from './MyPosts.module.css'
 import Comment from './Post/Comment'
+import {Field, reduxForm} from 'redux-form';
+
+const MyPostsForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div className={s.inputWrapper}>
+        <Field component={'textarea'}
+               name={"newPostText"}
+               className={s.inputText} rows='3'/>
+      </div>
+      <div className={s.btnWrapper}>
+        <button className={s.btnAddPost}> Add post </button>
+      </div>
+    </form>
+  )
+}
+const MyPostsReduxForm = reduxForm({form: 'newPost'})(MyPostsForm)
 
 const MyPosts = (props) => {
-
-
-    let post = props.posts.map((p,idx) => <Comment key={idx}
-                                                   message={p.post}
-                                                   likes={p.likesCount}/>)
-
-    let addPostInput = React.createRef();
-
-    let addPost = () => {
-        props.addPost()
-    }
-
-    let onPostChange = () => {
-        let text = addPostInput.current.value
-        props.onPostChange(text)
-    }
-
-    return (
-        <div className={s.myPostsWrapper}>
-            <h3 className={s.title}>My posts</h3>
-            <div>
-                <div className={s.inputWrapper}>
-                    <textarea onChange={ onPostChange }
-                              value={props.newPostText}
-                              ref={ addPostInput }
-                              className={s.inputText} rows='4' />
-                </div>
-                <div className={s.btnWrapper}>
-                    <button onClick={ addPost }
-                            className={s.btnAddPost}>Add post</button>
-                </div>
-            </div>
-            <div className={s.comments}>
-                {post}
-            </div>
-        </div>
-    )
+  let post = props.posts.map((p, idx) => <Comment key={idx}
+                                                  message={p.post}
+                                                  likes={p.likesCount}/>)
+  const onSubmit = formData => {
+    props.addNewPost(formData.newPostText)
+  }
+  return (
+    <div className={s.myPostsWrapper}>
+      <h3 className={s.title}>My posts</h3>
+      <MyPostsReduxForm onSubmit={onSubmit} />
+      <div className={s.comments}>
+        {post}
+      </div>
+    </div>
+  )
 }
 
 export default MyPosts;
