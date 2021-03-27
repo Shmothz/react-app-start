@@ -1,5 +1,4 @@
 const SEND_MESSAGE = 'SEND-MESSAGE'
-const UPGRADE_MESSAGE_TEXT = 'UPGRADE-MESSAGE-TEXT'
 
 let initialState = {
     dialogs : [
@@ -12,8 +11,7 @@ let initialState = {
         {id:1,message:'Im fine and you?'},
         {id:2,message:'We will rock you'},
         {id:3,message:'Enter sandman'},
-    ],
-    newMessageText: ''
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -21,27 +19,19 @@ const dialogsReducer = (state = initialState, action) => {
         case SEND_MESSAGE:
             let newMessage = {
                 id: state.messages.length,
-                message: state.newMessageText
+                message: action.textNewMessage
             }
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
                 newMessageText: ''
             }
-        case UPGRADE_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newText
-            }
         default:
             return state
     }
 }
 
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE})
-export const upgradeMessageTextActionCreator = (text) => ({
-    type: UPGRADE_MESSAGE_TEXT,
-    newText: text
-})
+export const sendMessageActionCreator = (textNewMessage) => ({type: SEND_MESSAGE, textNewMessage})
+
 
 export default dialogsReducer

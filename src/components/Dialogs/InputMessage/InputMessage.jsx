@@ -1,35 +1,26 @@
 import React from 'react'
 import s from './InputMessage.module.css'
+import {Field, reduxForm} from 'redux-form';
 
-const InputMessage = (props) => {
+const InputMessageForm = (props) => {
 
-    // let inputTextMessage = React.createRef()
 
-    let sendMessage = () => {
-        props.sendMessage()
-    }
-    let onMessageChange = (e) => {
-        let text = e.target.value
-        // let text = inputTextMessage.current.value
-        props.onMessageChange(text)
-    }
-
-    return (
-        <div className={s.inputWrapper}>
-            <img className={s.addFilesIcon}
-                 src="http://cdn.onlinewebfonts.com/svg/img_551060.png"
-                 alt="add files"/>
-            <textarea onChange={onMessageChange}
-                      value={props.newMessageText}
-                      className={s.inputText}
-                      // ref={inputTextMessage}
-                      rows='2' />
-            <img onClick={sendMessage}
-                 className={s.sendMessageIcon}
-                 src="https://img.pngio.com/arrows-icon-png-95628-free-icons-library-arrow-vector-icon-png-1600_1600.jpg"
-                 alt="message"/>
-        </div>
-    )
+  return (
+    <form onSubmit={props.handleSubmit} className={s.inputWrapper}>
+      <Field name={'textNewMessage'} component={'textarea'} className={s.inputText} rows='2'/>
+      <button>Send</button>
+    </form>
+  )
 }
 
-export default InputMessage;
+const InputMessageReduxForm = reduxForm({form:'newMessageText'})(InputMessageForm)
+
+const InputMessage = (props) => {
+  let sendMessage = (values) => {
+    console.log(values)
+    props.sendMessage(values.textNewMessage)
+  }
+  return <InputMessageReduxForm onSubmit={sendMessage} />
+}
+
+export default InputMessage
