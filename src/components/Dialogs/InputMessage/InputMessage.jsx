@@ -17,7 +17,6 @@ const InputMessageReduxForm = reduxForm({form:'newMessageText'})(InputMessageFor
 
 const InputMessage = (props) => {
   let sendMessage = (values) => {
-    console.log(values)
     props.sendMessage(values.textNewMessage)
   }
   return <InputMessageReduxForm onSubmit={sendMessage} />

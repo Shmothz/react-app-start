@@ -1,0 +1,8 @@
+.formWrapper.error input,
+.formWrapper.error textarea {
+    border: solid palevioletred 2px;
+}
+
+.formWrapper.error span {
+    color: red;
+}

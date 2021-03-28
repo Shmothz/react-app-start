@@ -17,22 +17,40 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         data: action.data,
-        isAuth: true
+        isAuth: action.isAuth
       }
     default:
       return state
   }
 }
 
-export const auth = (id, login, email) => ({type: SET_USER, data: {id, login, email}})
+export const auth = (id, login, email, isAuth) => ({type: SET_USER, data: {id, login, email}, isAuth})
 
 export const getAccountTC = () => (dispatch) => {
-  loginAPI.login()
+  loginAPI.me()
     .then(data => {
       if (data.resultCode === 0) {
-        dispatch(auth(data.data.id, data.data.login, data.data.email))
+        dispatch(auth(data.data.id, data.data.login, data.data.email, true))
       }
     })
 }
+
+export const loginTC = (email, password, rememberMe) => (dispatch) => {
+  loginAPI.login(email, password, rememberMe)
+    .then(data => {
+      if (data.resultCode === 0) {
+        dispatch(getAccountTC())
+      }
+    })
+}
+export const logoutTC = () => (dispatch) => {
+  loginAPI.logout()
+    .then(data => {
+      if (data.resultCode === 0) {
+        dispatch(auth(null, null , null, false))
+      }
+    })
+}
+
 
 export default authReducer
