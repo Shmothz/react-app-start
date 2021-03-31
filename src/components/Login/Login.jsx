@@ -1,17 +1,18 @@
 import React from 'react'
 import {Field, reduxForm} from 'redux-form';
-import s from './Login.module.css'
 import {maxLengthCreator, required} from '../../helper/validations';
 import {Input} from '../common/InputForms/InputForms';
 import {loginTC, logoutTC} from '../../redux/auth-reducer';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import s from './Login.module.css'
 
 let maxLength30 = maxLengthCreator(30)
 
 const LoginForm = (props) => {
+
   return (
-    <form onSubmit={props.handleSubmit} className={s.loginForm}>
+    <form onSubmit={props.handleSubmit} className={s.loginForm} >
       <div>
         <Field component={Input} placeholder={'Login'} name={'login'} validate={[ required, maxLength30 ]} />
       </div>
@@ -24,6 +25,7 @@ const LoginForm = (props) => {
       <div>
         <button> Submit! </button>
       </div>
+      {  props.error && <span className={s.summaryError}>{props.error}</span> }
     </form>
   )
 }

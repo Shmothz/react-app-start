@@ -8,6 +8,14 @@ import {
 import Preloader from '../common/Preloader/Preloader'
 import RedirectComponent from '../../hoc/withAuth';
 import {compose} from 'redux';
+import {
+  getActivePage, getIsAuth,
+  getIsFetching,
+  getIsToggleFollow,
+  getTotalCount,
+  getUsersOnPage,
+  getUsersSelector
+} from '../../helper/selectors';
 
 class UsersAPI extends React.Component {
   componentDidMount = () => {
@@ -41,13 +49,13 @@ class UsersAPI extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    totalCount: state.usersPage.totalCount,
-    usersOnPage: state.usersPage.usersOnPage,
-    activePage: state.usersPage.activePage,
-    isFetching: state.usersPage.isFetching,
-    isToggleFollow: state.usersPage.isToggleFollow,
-    isAuth: state.auth.isAuth
+    users: getUsersSelector(state),
+    totalCount: getTotalCount(state),
+    usersOnPage: getUsersOnPage(state),
+    activePage: getActivePage(state),
+    isFetching: getIsFetching(state),
+    isToggleFollow: getIsToggleFollow(state),
+    isAuth: getIsAuth(state)
   }
 }
 

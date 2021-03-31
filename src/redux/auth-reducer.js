@@ -1,4 +1,5 @@
 import {loginAPI} from '../api/api';
+import {stopSubmit} from 'redux-form';
 
 const SET_USER = 'SET_USER'
 
@@ -38,8 +39,11 @@ export const getAccountTC = () => (dispatch) => {
 export const loginTC = (email, password, rememberMe) => (dispatch) => {
   loginAPI.login(email, password, rememberMe)
     .then(data => {
-      if (data.resultCode === 0) {
+      if (data.data.resultCode === 0) {
         dispatch(getAccountTC())
+      } else {
+        let message = data.data.messages.length > 0 ? data.data.messages[0] : "Some error"
+        dispatch(stopSubmit('Login',{_error: message}))
       }
     })
 }

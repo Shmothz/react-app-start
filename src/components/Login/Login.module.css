@@ -4,3 +4,6 @@
     margin: 150px auto 0;
     border-radius: 4px;
 }
+.summaryError {
+    color: red;
+}
