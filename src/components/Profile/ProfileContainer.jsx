@@ -1,12 +1,14 @@
 import React from 'react'
 import Profile from './Profile';
-import {getUserDataTC, toggleIsFetching} from '../../redux/profile-reducer';
+import {getProfileStatus, getUserDataTC, pushProfileStatus, toggleIsFetching} from '../../redux/profile-reducer';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 class ProfileContainer extends React.Component {
   componentDidMount = () => {
-    this.props.getUserDataTC(this.props.match.params.userId)
+    let userId = this.props.match.params.userId
+    this.props.getUserDataTC(userId)
+    this.props.getProfileStatus(userId)
   }
 
   render = () => {
@@ -18,8 +20,9 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status
   }
 }
 
-export default connect(mapStateToProps, {toggleIsFetching, getUserDataTC})(withRouter(ProfileContainer))
+export default connect(mapStateToProps, {toggleIsFetching, getUserDataTC, getProfileStatus, pushProfileStatus})(withRouter(ProfileContainer))

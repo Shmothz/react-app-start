@@ -28,6 +28,12 @@ export const usersAPI = {
 export const profileAPI = {
   getUserData (userId) {
     return instance.get(`profile/${userId}`)
+  },
+  getProfileStatus (userId) {
+    return instance.get(`profile/status/${userId}`)
+  },
+  pushProfileStatus (status) {
+    return instance.put(`profile/status`, { status: status })
   }
 }
 

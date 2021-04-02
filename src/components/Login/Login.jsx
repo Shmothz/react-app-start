@@ -10,7 +10,6 @@ import s from './Login.module.css'
 let maxLength30 = maxLengthCreator(30)
 
 const LoginForm = (props) => {
-
   return (
     <form onSubmit={props.handleSubmit} className={s.loginForm} >
       <div>

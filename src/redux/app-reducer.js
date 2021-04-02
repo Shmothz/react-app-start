@@ -1,6 +1,6 @@
 import {getAccountTC} from './auth-reducer';
 
-const INITIALIZED = 'INITIALIZED'
+const INITIALIZED = 'app/INITIALIZED'
 
 let initialState = {
   initialized: false
@@ -20,8 +20,7 @@ export const appReducer = (state = initialState, action) => {
 
 export const setInitialized = () => ({type: INITIALIZED})
 
-export const initializeApp = () => (dispatch) => {
-  Promise.all([dispatch(getAccountTC())]).then( () => {
-    dispatch(setInitialized())
-  })
+export const initializeApp = () => async (dispatch) => {
+  await dispatch(getAccountTC())
+  dispatch(setInitialized())
 }
