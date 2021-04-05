@@ -1,46 +1,40 @@
-import React, {useEffect, useState} from "react"
-import {Input} from '../../../common/InputForms/InputForms';
-import {Field, reduxForm} from 'redux-form';
-import {compose} from 'redux';
-import {connect} from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { Input } from "../../../common/InputForms/InputForms";
+import { Field, reduxForm } from "redux-form";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
 const ProfileStatus = (props) => {
-
-  const [editMode, toggleMode] = useState(false)
-  const [status, setStatus] = useState(props.status)
+  const [editMode, toggleMode] = useState(false);
+  const [status, setStatus] = useState(props.status);
 
   useEffect(() => {
-    setStatus(props.status)
-  }, [props.status])
+    setStatus(props.status);
+  }, [props.status]);
 
-  const activateEditMode = () => toggleMode(true)
+  const activateEditMode = () => toggleMode(true);
   const deactivateEditMode = () => {
-    toggleMode(false)
-    props.pushProfileStatus(status)
-  }
+    toggleMode(false);
+    props.pushProfileStatus(status);
+  };
 
-  const updateStatus = (e) => setStatus(e.currentTarget.value)
+  const updateStatus = (e) => setStatus(e.currentTarget.value);
   return (
     <>
-      {
-        !editMode &&
+      {!editMode && (
         <span onDoubleClick={activateEditMode}>{props.status}</span>
-      }
-      {
-        editMode &&
-        // <form onSubmit={props.handleSubmit}>
-        //   <Field component={Input} onChange={updateStatus} onBlur={deactivateEditMode}
-        //          autoFocus={true} name={'profileStatus'} value={status}/>
-          <input onChange={updateStatus} onBlur={deactivateEditMode}
-                 autoFocus={true}
-                 name={'profileStatus'} value={status}/>
-        // </form>
-      }
+      )}
+      {editMode && (
+        <input
+          onChange={updateStatus}
+          onBlur={deactivateEditMode}
+          autoFocus={true}
+          name={"profileStatus"}
+          value={status}
+        />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default compose(
-  connect(null, {}),
-  reduxForm({name: 'profileStatus'})
-)(ProfileStatus);
+export default compose(connect(null, {}))(ProfileStatus);

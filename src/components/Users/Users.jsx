@@ -1,44 +1,66 @@
-import React from 'react'
-import userAvatar from '../../assets/images/user.jpg'
-import s from './Users.module.css'
-import {NavLink} from 'react-router-dom';
+import React from "react";
+import userAvatar from "../../assets/images/user.jpg";
+import s from "./Users.module.css";
+import { NavLink } from "react-router-dom";
+import Paginator from "./Paginator";
 
-const Users = (props) => {
-  let pagesCount = Math.ceil(props.totalCount / props.usersOnPage)
-  let pages = []
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i)
-  }
+const Users = ({
+  users,
+  isToggleFollow,
+  followTC,
+  unfollowTC,
+  activePage,
+  setActivePage,
+  totalCount,
+  usersOnPage,
+}) => {
   return (
     <div>
-      <div className={s.pagesNumbersWrapper}>
-        {pages.map(p => <span key={p.id} className={props.activePage === p ? s.selectedPage : s.pageNumber}
-                              onClick={() => {
-                                props.setActivePage(p)
-                              }}>{p}</span>)}
-      </div>
-      {props.users.map(i => <div key={i.id}>
-        <div>
-          <NavLink to={`/profile/${i.id}`}>
-            <img className={s.userAvatar} src={i.photos.small ? i.photos.small : userAvatar}/>
-          </NavLink>
-          {i.followed
-            ? <button disabled={props.isToggleFollow.some(id => id === i.id)}
-                      className={s.unfollow} onClick={() => {
-              props.followTC(i.id)
-            }}>unfollow</button>
-            : <button disabled={props.isToggleFollow.some(id => id === i.id)}
-                      className={s.follow} onClick={() => {
-              props.unfollowTC(i.id)
-            }}>follow</button>}
+      {users.map((i) => (
+        <div key={i.id}>
+          <div>
+            <NavLink to={`/profile/${i.id}`}>
+              <img
+                className={s.userAvatar}
+                src={i.photos.small ? i.photos.small : userAvatar}
+                alt={"avatarUsers"}
+              />
+            </NavLink>
+            {i.followed ? (
+              <button
+                disabled={isToggleFollow.some((id) => id === i.id)}
+                className={s.unfollow}
+                onClick={() => {
+                  followTC(i.id);
+                }}
+              >
+                unfollow
+              </button>
+            ) : (
+              <button
+                disabled={isToggleFollow.some((id) => id === i.id)}
+                className={s.follow}
+                onClick={() => {
+                  unfollowTC(i.id);
+                }}
+              >
+                follow
+              </button>
+            )}
+          </div>
+          <div>
+            <span>{i.name}</span>
+          </div>
         </div>
-        <div>
-          <span>{i.name}</span>
-        </div>
-      </div>)}
+      ))}
+      <Paginator
+        activePage={activePage}
+        setActivePage={setActivePage}
+        totalCount={totalCount}
+        usersOnPage={usersOnPage}
+      />
     </div>
-  )
-}
+  );
+};
 
-
-export default Users
+export default Users;
