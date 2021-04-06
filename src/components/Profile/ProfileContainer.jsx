@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import {
   getProfileStatus,
   getUserDataTC,
+  pushNewAvatarTC,
   pushProfileStatus,
   toggleIsFetching,
 } from "../../redux/profile-reducer";
@@ -33,4 +34,5 @@ export default connect(mapStateToProps, {
   getUserDataTC,
   getProfileStatus,
   pushProfileStatus,
+  pushNewAvatarTC,
 })(withRouter(ProfileContainer));

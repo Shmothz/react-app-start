@@ -20,11 +20,7 @@
     grid-gap: 8px;
 }
 
-.avatar {
-    display: inline-block;
-    width: 150px;
-    height: 150px;
-}
+
 .aboutMe {
     display: inline-block;
 }

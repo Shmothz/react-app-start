@@ -4,6 +4,7 @@ const ADD_POST = "profile/ADD-POST";
 const GET_PROFILE = "profile/GET_PROFILE";
 const IS_FETCHING = "profile/IS_FETCHING";
 const SET_STATUS = "profile/SET_STATUS";
+const SET_PHOTO = "profile/SET_PHOTO";
 
 let initialState = {
   posts: [
@@ -44,6 +45,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         status: action.status,
       };
+    case SET_PHOTO:
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      };
     default:
       return state;
   }
@@ -59,6 +65,7 @@ export const toggleIsFetching = (isFetching) => ({
 });
 export const addNewPost = (newPostText) => ({ type: ADD_POST, newPostText });
 const setProfileStatus = (status) => ({ type: SET_STATUS, status });
+const setPhotos = (file) => ({ type: SET_PHOTO, photos: file });
 
 export const getUserDataTC = (userId) => (dispatch) => {
   profileAPI.getUserData(userId).then((res) => {
@@ -73,6 +80,12 @@ export const pushProfileStatus = (status) => async (dispatch) => {
   const res = await profileAPI.pushProfileStatus(status);
   if (res.data.resultCode === 0) {
     dispatch(setProfileStatus(status));
+  }
+};
+export const pushNewAvatarTC = (avatar) => async (dispatch) => {
+  const res = await profileAPI.pushNewAvatar(avatar);
+  if (res.data.resultCode === 0) {
+    dispatch(setPhotos(res.data.data.photos));
   }
 };
 

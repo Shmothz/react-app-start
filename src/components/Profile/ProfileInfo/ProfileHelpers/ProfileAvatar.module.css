@@ -1,0 +1,15 @@
+.avatarWrapper {
+    position: relative;
+}
+.avatar {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+}
+.avatarWrapper:hover .setAvatarBtn {
+    position: absolute;
+    display: block;
+}
+.setAvatarBtn {
+    display: none;
+}
