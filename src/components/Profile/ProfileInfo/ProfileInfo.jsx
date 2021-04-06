@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileHelpers/ProfileStatus";
 import ProfileAvatar from "./ProfileHelpers/ProfileAvatar";
 import ProfileAboutMe from "./ProfileHelpers/ProfileAboutMe";
+import { pushNewFullName } from "../../../redux/profile-reducer";
 
 function ProfileInfo(props) {
   if (!props.profile) {

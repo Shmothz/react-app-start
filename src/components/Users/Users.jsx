@@ -2,7 +2,7 @@ import React from "react";
 import userAvatar from "../../assets/images/user.jpg";
 import s from "./Users.module.css";
 import { NavLink } from "react-router-dom";
-import Paginator from "./Paginator";
+import Paginator from "../common/Paginator/Paginator";
 
 const Users = ({
   users,
