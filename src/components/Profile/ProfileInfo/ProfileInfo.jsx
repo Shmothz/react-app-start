@@ -3,6 +3,7 @@ import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileHelpers/ProfileStatus";
 import ProfileAvatar from "./ProfileHelpers/ProfileAvatar";
+import ProfileAboutMe from "./ProfileHelpers/ProfileAboutMe";
 
 function ProfileInfo(props) {
   if (!props.profile) {
@@ -23,16 +24,13 @@ function ProfileInfo(props) {
           large={props.profile.photos.large}
           pushNewAvatarTC={props.pushNewAvatarTC}
         />
-        <div className={s.fullName}>
-          <span>{props.profile.fullName}</span>
-        </div>
+        <span className={s.fullName}>{props.profile.fullName}</span>
         <ProfileStatus
           status={props.status}
           pushProfileStatus={props.pushProfileStatus}
         />
-        <div className={s.aboutMe}>
-          <span>About me : {props.profile.aboutMe}</span>
-        </div>
+        <span className={s.aboutMeText}>About me:</span>
+        <ProfileAboutMe profile={props.profile} />
       </div>
     </div>
   );

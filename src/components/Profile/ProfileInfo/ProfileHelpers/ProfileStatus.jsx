@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Input } from "../../../common/InputForms/InputForms";
-import { Field, reduxForm } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import s from "./ProfileStatus.module.css";
 
 const ProfileStatus = (props) => {
   const [editMode, toggleMode] = useState(false);
@@ -20,7 +19,7 @@ const ProfileStatus = (props) => {
 
   const updateStatus = (e) => setStatus(e.currentTarget.value);
   return (
-    <>
+    <div className={s.profileStatusWrapper}>
       {!editMode && (
         <span onDoubleClick={activateEditMode}>{props.status}</span>
       )}
@@ -33,7 +32,7 @@ const ProfileStatus = (props) => {
           value={status}
         />
       )}
-    </>
+    </div>
   );
 };
 

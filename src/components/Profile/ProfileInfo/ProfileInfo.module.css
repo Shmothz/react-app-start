@@ -1,8 +1,6 @@
-
 .wallpaperWrapper {
     height: 250px;
 }
-
 .wallpaper {
     overflow: hidden;
     height: 100%;
@@ -10,17 +8,22 @@
     border-radius: 4px 4px 0 0;
 }
 .infoWrapper {
+    display: grid;
+    grid-template-columns: 180px 400px 90px;
+    grid-template-rows: 25px 25px 25px 25px 25px 25px;
+    grid-gap: 5px;
     padding: 10px;
     margin: 8px 60px 0;
     background-color: rgb(150,150,200);
     border-radius: 4px;
     color: lightgoldenrodyellow;
-    display: grid;
-    grid-template-columns: 150px 320px;
-    grid-gap: 8px;
+}
+.fullName {
+    grid-column: 2/4;
+    grid-row: 1/2;
 }
 
-
-.aboutMe {
-    display: inline-block;
+.aboutMeText {
+    grid-column: 2/3;
+    grid-row: 3/4;
 }
