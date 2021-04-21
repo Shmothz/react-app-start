@@ -5,14 +5,16 @@ const SET_USER = 'auth/SET_USER'
 
 let initialState = {
   data: {
-    id: null,
-    login: null,
-    email: null
+    id: null as number | null,
+    login: null as string | null,
+    email: null as string | null
   },
   isAuth: false
 }
 
-const authReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+const authReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_USER:
       return {
@@ -25,16 +27,25 @@ const authReducer = (state = initialState, action) => {
   }
 }
 
-export const auth = (id, login, email, isAuth) => ({type: SET_USER, data: {id, login, email}, isAuth})
+type AuthType = {
+  type: typeof SET_USER
+  data: {
+    id: number | null
+    login: string | null
+    email: string | null
+  }
+  isAuth: boolean
+}
+export const auth = (id: number | null, login: string | null, email: string | null, isAuth: boolean): AuthType => ({type: SET_USER, data: {id, login, email}, isAuth})
 
-export const getAccountTC = () => async (dispatch) => {
+export const getAccountTC = () => async (dispatch: any) => {
   const data = await loginAPI.me()
   if (data.resultCode === 0) {
     dispatch(auth(data.data.id, data.data.login, data.data.email, true))
   }
 }
 
-export const loginTC = (email, password, rememberMe) => async (dispatch) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
   const data = await loginAPI.login(email, password, rememberMe)
   if (data.data.resultCode === 0) {
     dispatch(getAccountTC())
@@ -43,7 +54,7 @@ export const loginTC = (email, password, rememberMe) => async (dispatch) => {
     dispatch(stopSubmit('Login', {_error: message}))
   }
 }
-export const logoutTC = () => async (dispatch) => {
+export const logoutTC = () => async (dispatch: any) => {
   const data = await loginAPI.logout()
   if (data.resultCode === 0) {
     dispatch(auth(null, null, null, false))
