@@ -18,7 +18,8 @@ let initialState = {
     activePage: 1,
     totalCount: 0,
     isFetching: false,
-    isToggleFollow: [] as Array<number> // array of users id
+    isToggleFollow: [] as Array<number>, // array of users id
+    portionPages: 5
 }
 
 type InitialStateType = typeof initialState

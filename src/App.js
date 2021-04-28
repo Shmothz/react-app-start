@@ -32,7 +32,7 @@ class App extends React.Component {
         <div className="app-wrapper-content">
           <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/users" render={() => <UsersContainer />} />
+          <Route path="/users" render={() => <UsersContainer titlePage={"Users"} />} />
           <Route path="/news" render={componentWithSuspense(News)} />
           <Route path="/music" render={componentWithSuspense(Music)} />
           <Route path="/settings" render={componentWithSuspense(Settings)} />
