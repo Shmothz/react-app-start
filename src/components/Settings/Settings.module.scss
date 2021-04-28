@@ -1,0 +1,14 @@
+.settingsWrapper {
+  padding: 20px;
+  width: 200px;
+  background-color: blueviolet;
+  border-radius: 4px;
+
+  .settingsTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    border-radius: 4px;
+  }
+}
