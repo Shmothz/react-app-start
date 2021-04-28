@@ -1,4 +1,6 @@
 import {getAccountTC} from './auth-reducer';
+import {ThunkAction} from "redux-thunk";
+import {ActiveStateType} from "./redux-store";
 
 const INITIALIZED = 'app/INITIALIZED'
 
@@ -19,12 +21,15 @@ export const appReducer = (state = initialState, action: any): InitialStateType 
       return state
   }
 }
+
+type ActionsTypes = SetInitializedType
+
 type SetInitializedType = {
   type: typeof INITIALIZED
 }
 export const setInitialized = (): SetInitializedType => ({type: INITIALIZED})
 
-export const initializeApp = () => async (dispatch: any) => {
+export const initializeApp = ():ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> => async (dispatch) => {
   await dispatch(getAccountTC())
   dispatch(setInitialized())
 }

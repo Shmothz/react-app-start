@@ -1,3 +1,5 @@
+import {AnyAction} from "redux";
+
 type FriendType = {
     id: number
     avatar: string
@@ -15,7 +17,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-const navReducer = (state = initialState, action: any): InitialStateType => {
+const navReducer = (state = initialState, action: AnyAction): InitialStateType => {
     return state
 }
 

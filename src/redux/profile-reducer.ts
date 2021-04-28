@@ -1,5 +1,7 @@
 import {profileAPI} from "../api/api";
 import {PhotosType, PostType, ProfileType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {ActiveStateType} from "./redux-store";
 
 const ADD_POST = "profile/ADD-POST";
 const GET_PROFILE = "profile/GET_PROFILE";
@@ -21,7 +23,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -67,6 +69,8 @@ export const setProfile = (profileData: ProfileType): SetProfileActionType => ({
     profile: profileData,
 });
 
+type ActionsTypes = SetProfileActionType | ToggleIsFetchingActionType | AddNewPostActionType | SetProfileStatusActionType | SetPhotosActionType
+
 type ToggleIsFetchingActionType = {
     type: typeof IS_FETCHING
     isFetching: boolean
@@ -91,21 +95,25 @@ type SetPhotosActionType = {
 }
 const setPhotos = (file: any): SetPhotosActionType => ({type: SET_PHOTO, photos: file});
 
-export const getUserDataTC = (userId: number) => async (dispatch: any) => {
+export const getUserDataTC = (userId: number):ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> =>
+    async (dispatch) => {
     const res = await profileAPI.getUserData(userId)
     dispatch(setProfile(res.data));
 };
-export const getProfileStatus = (userId: number) => async (dispatch: any) => {
+export const getProfileStatus = (userId: number):ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> =>
+    async (dispatch) => {
     const res = await profileAPI.getProfileStatus(userId);
     dispatch(setProfileStatus(res.data));
 };
-export const pushProfileStatus = (status: string) => async (dispatch: any) => {
+export const pushProfileStatus = (status: string):ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> =>
+    async (dispatch) => {
     const res = await profileAPI.pushProfileStatus(status);
     if (res.data.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 };
-export const pushNewAvatarTC = (avatar: any) => async (dispatch: any) => {
+export const pushNewAvatarTC = (avatar: any):ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> =>
+    async (dispatch) => {
     const res = await profileAPI.pushNewAvatar(avatar);
     if (res.data.resultCode === 0) {
         dispatch(setPhotos(res.data.data.photos));

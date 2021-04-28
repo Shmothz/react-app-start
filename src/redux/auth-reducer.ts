@@ -1,5 +1,8 @@
 import {loginAPI} from '../api/api';
 import {stopSubmit} from 'redux-form';
+import {ThunkAction} from "redux-thunk";
+import {ActiveStateType} from "./redux-store";
+import {AnyAction} from "redux";
 
 const SET_USER = 'auth/SET_USER'
 
@@ -14,7 +17,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
   switch (action.type) {
     case SET_USER:
       return {
@@ -27,6 +30,8 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
   }
 }
 
+type ActionsTypes = AuthType
+
 type AuthType = {
   type: typeof SET_USER
   data: {
@@ -38,14 +43,15 @@ type AuthType = {
 }
 export const auth = (id: number | null, login: string | null, email: string | null, isAuth: boolean): AuthType => ({type: SET_USER, data: {id, login, email}, isAuth})
 
-export const getAccountTC = () => async (dispatch: any) => {
+export const getAccountTC = ():ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> =>
+    async (dispatch) => {
   const data = await loginAPI.me()
   if (data.resultCode === 0) {
     dispatch(auth(data.data.id, data.data.login, data.data.email, true))
   }
 }
-
-export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean):ThunkAction<Promise<void>, ActiveStateType, unknown, AnyAction> =>
+    async (dispatch) => {
   const data = await loginAPI.login(email, password, rememberMe)
   if (data.data.resultCode === 0) {
     dispatch(getAccountTC())
@@ -54,7 +60,8 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
     dispatch(stopSubmit('Login', {_error: message}))
   }
 }
-export const logoutTC = () => async (dispatch: any) => {
+export const logoutTC = ():ThunkAction<Promise<void>, ActiveStateType, unknown, ActionsTypes> =>
+    async (dispatch) => {
   const data = await loginAPI.logout()
   if (data.resultCode === 0) {
     dispatch(auth(null, null, null, false))
