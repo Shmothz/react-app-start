@@ -1,8 +1,7 @@
 import s from "./ProfileAvatar.module.css";
-import React, { useState } from "react";
+import React from "react";
 
 const ProfileAvatar = ({ large, pushNewAvatarTC }) => {
-  //const [editMode, setEditMode] = useState(false);
 
   const selectedNewPhoto = (e) => {
     if (e.target.files.length) {
