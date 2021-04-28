@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import s from "./Paginator.module.css";
 
-const Paginator = ({
+type PropsTypes = {
+  activePage: number
+  setActivePage: (pageNumber: number) => void
+  totalCount: number
+  usersOnPage: number
+  portionPages: number
+}
+
+const Paginator:React.FC<PropsTypes> = ({
   activePage,
   setActivePage,
   totalCount,
@@ -10,7 +18,7 @@ const Paginator = ({
 }) => {
   const pagesCount = Math.ceil(totalCount / usersOnPage);
   const portionCount = Math.ceil(pagesCount / portionPages);
-  const pages = [];
+  const pages:number[] = [];
   for (let i = 1; i <= pagesCount; i++) pages.push(i);
 
   const renderVisiblePortion = Math.ceil(activePage / portionPages);
@@ -31,17 +39,17 @@ const Paginator = ({
       )}
       <div className={s.pagesNumbersWrapper}>
         {pages
-          .filter((p) => p >= leftBorder && p <= rightBorder)
-          .map((p) => {
+          .filter((page) => page >= leftBorder && page <= rightBorder)
+          .map((page) => {
             return (
               <span
-                key={p.id}
-                className={activePage === p ? s.selectedPage : s.pageNumber}
+                key={page}
+                className={activePage === page ? s.selectedPage : s.pageNumber}
                 onClick={() => {
-                  setActivePage(p);
+                  setActivePage(page);
                 }}
               >
-                {p}
+                {page}
               </span>
             );
           })}

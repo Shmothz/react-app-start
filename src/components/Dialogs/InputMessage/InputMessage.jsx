@@ -3,8 +3,6 @@ import s from './InputMessage.module.css'
 import {Field, reduxForm} from 'redux-form';
 
 const InputMessageForm = (props) => {
-
-
   return (
     <form onSubmit={props.handleSubmit} className={s.inputWrapper}>
       <Field name={'textNewMessage'} component={'textarea'} className={s.inputText} rows='2'/>
@@ -15,9 +13,9 @@ const InputMessageForm = (props) => {
 
 const InputMessageReduxForm = reduxForm({form:'newMessageText'})(InputMessageForm)
 
-const InputMessage = (props) => {
-  let sendMessage = (values) => {
-    props.sendMessage(values.textNewMessage)
+const InputMessage = ({sendMessageTC}) => {
+  const sendMessage = (values) => {
+    sendMessageTC(values.textNewMessage)
   }
   return <InputMessageReduxForm onSubmit={sendMessage} />
 }

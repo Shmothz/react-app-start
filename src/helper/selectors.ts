@@ -21,3 +21,9 @@ export const getIsToggleFollow = (state:ActiveStateType) => {
 export const getIsAuth = (state:ActiveStateType) => {
   return state.auth.isAuth
 }
+export const getDialogs = (state:ActiveStateType) => {
+  return state.dialogsPage.dialogs
+}
+export const getMessages = (state:ActiveStateType) => {
+  return state.dialogsPage.messages
+}

@@ -1,10 +1,14 @@
+import {ThunkAction} from "redux-thunk";
+import {ActiveStateType} from "./redux-store";
+import {AnyAction} from "redux";
+
 const SEND_MESSAGE = 'dialogs/SEND-MESSAGE'
 
-type DialogType = {
+export type DialogType = {
     id: number
     username: string
 }
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
@@ -16,12 +20,11 @@ let initialState = {
         {id:3,username:'Natasha'}
     ] as Array<DialogType>,
     messages : [
-        {id:0,message:'Hello'},
-        {id:1,message:'Im fine and you?'},
-        {id:2,message:'We will rock you'},
-        {id:3,message:'Enter sandman'},
-    ] as Array<MessageType>,
-    newMessageText: ''
+        {id:1,message:'Hello'},
+        {id:2,message:'Im fine and you?'},
+        {id:3,message:'We will rock you'},
+        {id:4,message:'Enter sandman'},
+    ] as Array<MessageType>
 }
 type InitialStateType = typeof initialState
 
@@ -34,8 +37,7 @@ const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStat
             }
             return {
                 ...state,
-                messages: [...state.messages, newMessage],
-                newMessageText: ''
+                messages: [...state.messages, newMessage]
             }
         default:
             return state
@@ -47,7 +49,11 @@ type SendMessageActionType = {
     type: typeof SEND_MESSAGE
     textNewMessage: string
 }
-export const sendMessageActionCreator = (textNewMessage: string) => ({type: SEND_MESSAGE, textNewMessage})
+const sendMessageAC = (textNewMessage: string) => ({type: SEND_MESSAGE, textNewMessage})
 
+export const sendMessageTC = (newMessageText: string): ThunkAction<void, ActiveStateType, unknown, AnyAction> =>
+    (dispatch) => {
+    dispatch(sendMessageAC(newMessageText))
+}
 
 export default dialogsReducer
