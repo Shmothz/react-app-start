@@ -22,7 +22,7 @@ const mapStateToProps = (state: ActiveStateType):MapStatePropsType => {
     }
 }
 
-const MyPostsContainer:FC<PropsType> = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, ActiveStateType>
+const MyPostsContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, ActiveStateType>
 (mapStateToProps, {addNewPost})(MyPosts)
 
 export default MyPostsContainer

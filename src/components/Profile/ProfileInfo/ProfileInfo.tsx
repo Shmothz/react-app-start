@@ -7,10 +7,10 @@ import ProfileAboutMe from "./ProfileHelpers/ProfileAboutMe";
 import {ProfileType} from "../../../types/types";
 
 type PropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
-    pushProfileStatus: () => void
-    pushNewAvatarTC: () => void
+    pushProfileStatus: (newStatusText: string) => void
+    pushNewAvatarTC: (newAvatar: any) => void
 }
 
 const ProfileInfo: FC<PropsType> = ({profile, pushNewAvatarTC, status, pushProfileStatus}) => {
